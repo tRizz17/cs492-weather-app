@@ -20,7 +20,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: Text(title, style: GoogleFonts.poppins()),
+      title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
       bottom: TabBar(controller: _tabController, tabs: [
         Semantics(label: "Forecasts Tab", child: Tab(icon: Icon(Icons.sunny_snowing))),
         Semantics(label: "Location Tab", child: Tab(icon: Icon(Icons.location_pin))),

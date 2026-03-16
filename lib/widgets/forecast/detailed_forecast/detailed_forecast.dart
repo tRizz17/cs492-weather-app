@@ -30,10 +30,42 @@ class _DetailedForecastState extends State<DetailedForecast> {
     }
   }
 
+  String promptBuilder(Forecast forecast) {
+    const orderedKeywords = [
+      'blizzard',
+      'thunderstorm',
+      'freezing rain',
+      'sleet',
+      'snow',
+      'flurries',
+      'fog',
+      'rain',
+      'showers',
+      'drizzle',
+      'haze',
+      'smoke',
+      'dust',
+      'windy',
+      'breezy',
+      'cloudy',
+      'overcast',
+      'sunny',
+      'clear',
+    ];
+
+    final lower = forecast.shortForecast.toLowerCase();
+    return orderedKeywords.firstWhere(
+      (keyword) => lower.contains(keyword),
+      orElse: () => 'sunny', // fallback
+    );
+  }
+
   Future<void> _fetchAndUpdateImage(Forecast forecast) async {
     String day = forecast.isDaytime ? "Day" : "Night";
 
-    String prompt = "$day ${forecast.shortForecast}".trim();
+    String imageSeed = promptBuilder(forecast);
+
+    String prompt = "${imageSeed.trim()}$day"; // day goes last for more consistency from Pexels
 
     final imageUrl = await pexelsImage.getImage(prompt);
 
@@ -82,7 +114,7 @@ class _DetailedForecastState extends State<DetailedForecast> {
                     fit: BoxFit.cover,
                   ),
                 ),
-      
+
               Positioned.fill(
                 child: Container(
                   color: Colors.black.withValues(alpha: 0.5),
