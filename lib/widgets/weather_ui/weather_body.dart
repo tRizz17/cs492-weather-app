@@ -14,7 +14,7 @@ class WeatherAppBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: double.infinity,
-      width: 500,
+      width: double.infinity,
       child: TabBarView(
         controller: _tabController,
         children: [

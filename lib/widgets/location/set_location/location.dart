@@ -76,10 +76,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                 ? "${locationProvider.location?.city}, ${locationProvider.location?.state} ${locationProvider.location?.zip}"
                 : "No Location...",
           ),
-          SizedBox(
-              height: 500,
-              width: 500,
-              child: SavedLocations())
+          Expanded(child: SavedLocations())
         ],
       ),
     );
