@@ -31,12 +31,12 @@ class MyApp extends StatelessWidget {
       title: 'CS492',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.amber, brightness: Brightness.light),
+            seedColor: themeProvider.seedColor, brightness: Brightness.light),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.amber, brightness: Brightness.dark),
+            seedColor: themeProvider.seedColor, brightness: Brightness.dark),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Tom\'s Weather'),
@@ -65,6 +65,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     locationProvider.openDatabase();
     final themeProvider = context.read<ThemeProvider>();
     themeProvider.loadDarkModePrefs();
+    final forecastProvider = context.read<ForecastProvider>();
+    forecastProvider.addListener(() {
+      if (forecastProvider.forecasts.isNotEmpty) {
+        themeProvider.setColorFromTemperature(
+            forecastProvider.forecasts[0].temperature);
+      }
+    });
     _tabController = TabController(length: 2, vsync: this);
     _tabController.index = 1;
     _tabController.addListener(() {
