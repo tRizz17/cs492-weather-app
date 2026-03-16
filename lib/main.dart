@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:weatherapp/providers/forecast_provider.dart';
 import 'package:weatherapp/providers/location_provider.dart';
 import 'package:weatherapp/providers/theme_provider.dart';
@@ -9,12 +8,12 @@ import 'package:weatherapp/widgets/weather_ui/weather_body.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized
-    try {
-      await dotenv.load(fileName: ".env"); // Load environment variables
-    } catch (e) {
-      throw Exception('Error loading .env file: $e'); // Print error if any
-    }
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized
+  try {
+    await dotenv.load(fileName: ".env"); // Load environment variables
+  } catch (e) {
+    throw Exception('Error loading .env file: $e'); // Print error if any
+  }
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => LocationProvider()),
     ChangeNotifierProvider(create: (context) => ForecastProvider()),
@@ -31,14 +30,16 @@ class MyApp extends StatelessWidget {
       showSemanticsDebugger: false,
       title: 'CS492',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber, brightness: Brightness.light),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.amber, brightness: Brightness.light),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.amber, brightness: Brightness.dark),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'CS492'),
+      home: const MyHomePage(title: 'Tom\'s Weather'),
       themeMode: themeProvider.darkMode ? ThemeMode.dark : ThemeMode.light,
     );
   }
@@ -90,9 +91,31 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
       appBar: WeatherAppBar(title: widget.title, tabController: _tabController),
       body: WeatherAppBody(tabController: _tabController),
+      endDrawer: Drawer(
+        child: Semantics(
+          label: "Dark Mode Switch",
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Dark Mode Switch"),
+              Switch(
+                  value: themeProvider.darkMode,
+                  onChanged: (value) => {themeProvider.setDarkMode(value)}),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  "Just in case you are reading this and it is dark out.",
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
