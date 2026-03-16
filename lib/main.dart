@@ -6,6 +6,7 @@ import 'package:weatherapp/providers/theme_provider.dart';
 import 'package:weatherapp/widgets/weather_ui/weather_app_bar.dart';
 import 'package:weatherapp/widgets/weather_ui/weather_body.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized
@@ -28,15 +29,17 @@ class MyApp extends StatelessWidget {
     final themeProvider = context.watch<ThemeProvider>();
     return MaterialApp(
       showSemanticsDebugger: false,
-      title: 'CS492',
+      title: 'Tom\'s Weather App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: themeProvider.seedColor, brightness: Brightness.light),
+        textTheme: GoogleFonts.latoTextTheme(),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: themeProvider.seedColor, brightness: Brightness.dark),
+        textTheme: GoogleFonts.latoTextTheme(ThemeData(brightness: Brightness.dark).textTheme),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Tom\'s Weather'),

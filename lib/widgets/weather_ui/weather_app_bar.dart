@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WeatherAppBar({
@@ -19,7 +20,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: Text(title),
+      title: Text(title, style: GoogleFonts.poppins()),
       bottom: TabBar(controller: _tabController, tabs: [
         Semantics(label: "Forecasts Tab", child: Tab(icon: Icon(Icons.sunny_snowing))),
         Semantics(label: "Location Tab", child: Tab(icon: Icon(Icons.location_pin))),
