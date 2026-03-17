@@ -77,6 +77,7 @@ Before you begin, make sure you are logged in to your GitHub account. If you don
 
 # Demonstration Video
 
-If you're interested in a walk-through of the application UI and codebase, click this link to a watch a short demonstration video:
-[https://youtu.be/a7b83kPU_9Q](Tom's Weather App Demo)
+If you're interested in a walk-through of the application UI and codebase, click this link to a watch a short [demonstration] video!
 
+
+[demonstration]: https://youtu.be/a7b83kPU_9Q
