@@ -105,25 +105,39 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: WeatherAppBar(title: widget.title, tabController: _tabController),
       body: WeatherAppBody(tabController: _tabController),
-      endDrawer: Drawer(
-        child: Semantics(
-          label: "Dark Mode Switch",
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Dark Mode Switch"),
-              Switch(
-                  value: themeProvider.darkMode,
-                  onChanged: (value) => {themeProvider.setDarkMode(value)}),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  "Just in case you are reading this and it is dark out.",
-                  textAlign: TextAlign.center,
-                ),
-              )
-            ],
-          ),
+      endDrawer: DarkModeDrawer(themeProvider: themeProvider),
+    );
+  }
+}
+
+class DarkModeDrawer extends StatelessWidget {
+  const DarkModeDrawer({
+    super.key,
+    required this.themeProvider,
+  });
+
+  final ThemeProvider themeProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Semantics(
+        label: "Dark Mode Switch",
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Dark Mode Switch"),
+            Switch(
+                value: themeProvider.darkMode,
+                onChanged: (value) => {themeProvider.setDarkMode(value)}),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Just in case you are reading this and it is dark out.",
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
         ),
       ),
     );

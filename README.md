@@ -33,9 +33,12 @@ Additionally, there is a drawer that can be accessed via clicking on the hamburg
 
 ### Color Theme
 Theme-wise, the app uses the current forecast of the current location to update the global color theme of the app. For instance, if the temperature is above 100, the app bar will be bright orange. If the temperature is at the freezing point or below, the app bar will be a frosty blue. There are additional colors for temperatures in-between. 
+<br>
 
 
 # Deployment Instructions
+
+Feel free to fork this appication and make any changes to it that you'd like. Here's how to do it:
 
 ## Step 1: Ensure Flutter is installed on your machine
 
